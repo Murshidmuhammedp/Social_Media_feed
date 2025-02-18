@@ -9,6 +9,7 @@ const PostCreateBox = () => {
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const userId = '67b2e466cf4120935c777571'
 
   const handleTextChange = (event) => {
     setText(event.target.value);
@@ -20,14 +21,13 @@ const PostCreateBox = () => {
 
   const handleSubmit = async () => {
     if (!text.trim() && !image) {
-      setError("Please add text or an image.");
-      return;
+      const response = await axios.post(`http://localhost:1000/api/posts/${userId}`)
+      alert(response.data.message);
     }
 
     setLoading(true);
-    setError("");  // Clear any previous error
+    setError("");  
 
-    // Simulate a post submission (replace with actual API call)
     setTimeout(() => {
       console.log("Post Data:", { text, image });
       setText("");

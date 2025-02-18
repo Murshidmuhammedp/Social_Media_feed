@@ -122,7 +122,6 @@ export default function InstagramPost() {
           >
             MUI
           </Link>{' '}
-          The React component library you always wanted
         </Typography>
         <Link
           component="button"
