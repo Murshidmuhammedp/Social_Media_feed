@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from 'axios'
 import {
   Box,
   Button,
@@ -44,8 +45,8 @@ const PasswordStrength = styled(LinearProgress)(({ strength }) => ({
   "& .MuiLinearProgress-bar": {
     backgroundColor:
       strength === "weak" ? "#ff4444" :
-      strength === "medium" ? "#ffa000" :
-      "#00c853"
+        strength === "medium" ? "#ffa000" :
+          "#00c853"
   }
 }));
 
@@ -114,10 +115,9 @@ const SignUp = () => {
     e.preventDefault();
     if (Object.keys(errors).length === 0 && termsAccepted) {
       setLoading(true);
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      const response = await axios.post('http://localhost:1000/api/users/register', { formData })
       setLoading(false);
-      alert("Sign up successful!");
+      alert(response.data.message);
     }
   };
 

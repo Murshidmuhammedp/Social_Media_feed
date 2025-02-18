@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/system";
 import { FiMail, FiEye, FiEyeOff, FiLock } from "react-icons/fi";
+import axios from "axios";
 
 const StyledCard = styled(Card)(({ theme }) => ({
   maxWidth: 400,
@@ -56,7 +57,7 @@ const SignIn = () => {
       ...prev,
       [name]: value
     }));
-    
+
     // Clear errors when user starts typing
     if (errors[name]) {
       setErrors((prev) => ({
@@ -89,8 +90,8 @@ const SignIn = () => {
 
     setIsLoading(true);
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      const response = await axios.post('http://localhost:1000/api/users/login', { formData })
+      alert(response.data.message);
       console.log("Login successful", formData);
     } catch (error) {
       setErrors({ submit: "Authentication failed. Please try again." });
